@@ -1,10 +1,10 @@
-import { Link, Outlet } from "@remix-run/react";
-import type { LinksFunction } from "@remix-run/node";
+import { Link, Outlet } from '@remix-run/react'
+import type { LinksFunction } from '@remix-run/node'
 
-import globalStylesUrl from "~/styles/jokes.css"
+import globalStylesUrl from '~/styles/jokes.css'
 
 export const links: LinksFunction = () => [
-    { rel: "stylesheet", href: globalStylesUrl },
+  { rel: 'stylesheet', href: globalStylesUrl },
 ]
 
 export default function Jokes() {
@@ -13,11 +13,7 @@ export default function Jokes() {
       <header className="jokes-header">
         <div className="container">
           <h1 className="home-link">
-            <Link
-              to="/"
-              title="Remix Jokes"
-              aria-label="Remix Jokes"
-            >
+            <Link to="/" title="Remix Jokes" aria-label="Remix Jokes">
               <span className="logo">🤪</span>
               <span className="logo-medium">J🤪KES</span>
             </Link>
@@ -44,5 +40,5 @@ export default function Jokes() {
         </div>
       </main>
     </div>
-  );
+  )
 }

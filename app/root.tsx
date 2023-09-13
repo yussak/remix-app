@@ -1,22 +1,22 @@
-import type { LinksFunction } from "@remix-run/node";
-import { Links, LiveReload, Outlet } from "@remix-run/react";
+import type { LinksFunction } from '@remix-run/node'
+import { Links, LiveReload, Outlet } from '@remix-run/react'
 
-import globalStylesUrl from "~/styles/global.css"
-import globalMediumStylesUrl from "~/styles/global-medium.css"
-import globalLargeStylesUrl from "~/styles/global-large.css"
+import globalStylesUrl from '~/styles/global.css'
+import globalMediumStylesUrl from '~/styles/global-medium.css'
+import globalLargeStylesUrl from '~/styles/global-large.css'
 
 export const links: LinksFunction = () => [
-    { rel: "stylesheet", href: globalStylesUrl },
-    { 
-      rel: "stylesheet",
-      href: globalMediumStylesUrl,
-      media: "print, (min-width: 640px)",
-    },
-    { 
-      rel: "stylesheet",
-      href: globalLargeStylesUrl,
-      media: "screen and (min-width: 1024px)",
-    },
+  { rel: 'stylesheet', href: globalStylesUrl },
+  {
+    rel: 'stylesheet',
+    href: globalMediumStylesUrl,
+    media: 'print, (min-width: 640px)',
+  },
+  {
+    rel: 'stylesheet',
+    href: globalLargeStylesUrl,
+    media: 'screen and (min-width: 1024px)',
+  },
 ]
 
 export default function App() {
@@ -24,10 +24,7 @@ export default function App() {
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Remix: So great, it's funny!</title>
         <Links />
       </head>
@@ -37,5 +34,5 @@ export default function App() {
         <Outlet />
       </body>
     </html>
-  );
+  )
 }
