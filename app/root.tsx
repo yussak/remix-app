@@ -1,23 +1,23 @@
-import type { LinksFunction } from '@remix-run/node'
-import { Links, LiveReload, Outlet } from '@remix-run/react'
+import type { LinksFunction } from "@remix-run/node";
+import { Links, LiveReload, Outlet } from "@remix-run/react";
 
-import globalStylesUrl from '~/styles/global.css'
-import globalMediumStylesUrl from '~/styles/global-medium.css'
-import globalLargeStylesUrl from '~/styles/global-large.css'
+import globalStylesUrl from "~/styles/global.css";
+import globalMediumStylesUrl from "~/styles/global-medium.css";
+import globalLargeStylesUrl from "~/styles/global-large.css";
 
 export const links: LinksFunction = () => [
-  { rel: 'stylesheet', href: globalStylesUrl },
+  { rel: "stylesheet", href: globalStylesUrl },
   {
-    rel: 'stylesheet',
+    rel: "stylesheet",
     href: globalMediumStylesUrl,
-    media: 'print, (min-width: 640px)',
+    media: "print, (min-width: 640px)",
   },
   {
-    rel: 'stylesheet',
+    rel: "stylesheet",
     href: globalLargeStylesUrl,
-    media: 'screen and (min-width: 1024px)',
+    media: "screen and (min-width: 1024px)",
   },
-]
+];
 
 export default function App() {
   return (
@@ -34,5 +34,5 @@ export default function App() {
         <Outlet />
       </body>
     </html>
-  )
+  );
 }
