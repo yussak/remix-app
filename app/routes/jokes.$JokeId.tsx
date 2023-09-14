@@ -1,4 +1,4 @@
-import { LoaderArgs, json } from "@remix-run/node";
+import { type LoaderArgs, json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import { db } from "~/utils/db.server";
 
