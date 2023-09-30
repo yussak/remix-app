@@ -5,8 +5,7 @@ import { db } from "~/utils/db.server";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const joke = await db.joke.findUnique({
-    // TODO:JokeId=>jokeIdにしてファイル名もそれに修正したい
-    where: { id: params.JokeId },
+    where: { id: params.jokeId },
   });
   if (!joke) {
     throw new Error("Joke not found");
@@ -27,10 +26,10 @@ export default function Joke() {
 }
 
 export function ErrorBoundary() {
-  const { JokeId } = useParams();
+  const { jokeId } = useParams();
   return (
     <div className="error-container">
-      There was an error loading joke by the id "${JokeId}". Sorry.
+      There was an error loading joke by the id "${jokeId}". Sorry. There was an
     </div>
   );
 }
