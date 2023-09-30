@@ -1,7 +1,8 @@
-import { type ActionArgs, redirect } from "@remix-run/node";
+import { type redirect, ActionFunctionArgs } from "@remix-run/node";
 import { useActionData } from "@remix-run/react";
 import { db } from "~/utils/db.server";
 import { badRequest } from "~/utils/request.server";
+import { requireUserId } from "~/utils/session.server";
 
 function validateJokeName(name: string) {
   if (name.length < 3) {
@@ -15,7 +16,8 @@ function validateJokeContent(content: string) {
   }
 }
 
-export const action = async ({ request }: ActionArgs) => {
+export const action = async ({ request }: ActionFunctionArgs) => {
+  const userId = await requireUserId(request);
   const form = await request.formData();
   const content = form.get("content");
   const name = form.get("name");
