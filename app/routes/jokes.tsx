@@ -1,21 +1,23 @@
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
-import { json, type LinksFunction } from "@remix-run/node";
+import { json, type LoaderFunctionArgs, LinksFunction } from "@remix-run/node";
 
 import globalStylesUrl from "~/styles/jokes.css";
 import { db } from "~/utils/db.server";
+import { getUser } from "~/utils/session.server";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: globalStylesUrl },
 ];
 
-export const loader = async () => {
-  return json({
-    jokeListItems: await db.joke.findMany({
-      orderBy: { createdAt: "desc" },
-      select: { id: true, name: true },
-      take: 4,
-    }),
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+  const jokeListItems = await db.joke.findMany({
+    orderBy: { createdAt: "desc" },
+    select: { id: true, name: true },
+    take: 4,
   });
+  const user = await getUser(request);
+
+  return json({ jokeListItems, user });
 };
 
 export default function Jokes() {
@@ -31,6 +33,18 @@ export default function Jokes() {
               <span className="logo-medium">J🤪KES</span>
             </Link>
           </h1>
+          {data.user ? (
+            <div className="user-info">
+              <span>{`Hi ${data.user.username}`}</span>
+              <form action="/logout" method="post">
+                <button type="submit" className="button">
+                  Logout
+                </button>
+              </form>
+            </div>
+          ) : (
+            <Link to="/login">Login</Link>
+          )}
         </div>
       </header>
       <main className="jokes-main">
