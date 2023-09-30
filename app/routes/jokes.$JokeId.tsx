@@ -5,7 +5,8 @@ import { db } from "~/utils/db.server";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const joke = await db.joke.findUnique({
-    where: { id: params.jokeId },
+    // TODO:JokeId=>jokeIdにしてファイル名もそれに修正したい
+    where: { id: params.JokeId },
   });
   if (!joke) {
     throw new Error("Joke not found");
