@@ -1,8 +1,9 @@
-import { type LoaderArgs, json } from "@remix-run/node";
+import type { LoaderFunctionArgs } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import { db } from "~/utils/db.server";
 
-export const loader = async ({ params }: LoaderArgs) => {
+export const loader = async ({ params }: LoaderFunctionArgs) => {
   const joke = await db.joke.findUnique({
     where: { id: params.jokeId },
   });
