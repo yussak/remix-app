@@ -8,9 +8,10 @@ import {
   useRouteError,
 } from "@remix-run/react";
 import { db } from "~/utils/db.server";
-import { requireUserId } from "~/utils/session.server";
+import { getUserId, requireUserId } from "~/utils/session.server";
 
-export const loader = async ({ params }: LoaderFunctionArgs) => {
+export const loader = async ({ params, request }: LoaderFunctionArgs) => {
+  const userId = await getUserId(request);
   const joke = await db.joke.findUnique({
     where: { id: params.jokeId },
   });
@@ -19,7 +20,10 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
       status: 404,
     });
   }
-  return json({ joke });
+  return json({
+    isOwner: userId === joke.jokesterId,
+    joke,
+  });
 };
 
 export const action = async ({ params, request }: ActionFunctionArgs) => {
@@ -56,11 +60,13 @@ export default function Joke() {
       <p>here's your hilarious joke:</p>
       <p>{data.joke.content}</p>
       <Link to=".">{data.joke.name} permalink</Link>
-      <form method="post">
-        <button className="button" name="intent" type="submit" value="delete">
-          Delete
-        </button>
-      </form>
+      {data.isOwner ? (
+        <form method="post">
+          <button className="button" name="intent" type="submit" value="delete">
+            Delete
+          </button>
+        </form>
+      ) : null}
     </div>
   );
 }
