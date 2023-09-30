@@ -1,5 +1,6 @@
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
-import { json, type LoaderFunctionArgs, LinksFunction } from "@remix-run/node";
+import type { LoaderFunctionArgs, LinksFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
 
 import globalStylesUrl from "~/styles/jokes.css";
 import { db } from "~/utils/db.server";
