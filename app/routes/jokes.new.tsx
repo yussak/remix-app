@@ -1,4 +1,5 @@
-import { type redirect, ActionFunctionArgs } from "@remix-run/node";
+import { type ActionFunctionArgs } from "@remix-run/node";
+import { redirect } from "@remix-run/node";
 import { useActionData } from "@remix-run/react";
 import { db } from "~/utils/db.server";
 import { badRequest } from "~/utils/request.server";
