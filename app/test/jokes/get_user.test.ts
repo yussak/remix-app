@@ -3,16 +3,16 @@ import { expect, test } from "vitest";
 import { db } from "../../utils/db.server";
 import { faker } from "@faker-js/faker";
 
+// このファイルでuser CRUDまとめてやるかもしれない
+// とりあえず通るテストを書く。リファクタリングは後
+
 test("can get user", async () => {
-  // TODO:faker-jsで書き換える
-  //　https://fakerjs.dev/guide/frameworks.html
-  const mockUser = {
-    id: faker.string.uuid(),
-    createdAt: faker.date.recent(),
-    updatedAt: faker.date.recent(),
-    username: faker.person.fullName(),
-    passwordHash: faker.internet.password(),
-  };
+  const mockUser = await db.user.create({
+    data: {
+      username: faker.person.fullName(),
+      passwordHash: faker.internet.password(),
+    },
+  });
   console.log("mockUserは", mockUser);
 
   const result = await db.user.findUnique({
