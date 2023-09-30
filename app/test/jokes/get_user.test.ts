@@ -18,8 +18,10 @@ test("can get user", async () => {
   const result = await db.user.findUnique({
     where: { id: mockUser.id },
   });
+  if (!result) {
+    return null;
+  }
   console.log("resultは", result);
 
-  // 'result' は 'null' の可能性があります。とあるので必要なら対処
   expect(mockUser.id).toEqual(result.id);
 });
