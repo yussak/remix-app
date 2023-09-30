@@ -7,21 +7,21 @@ import { faker } from "@faker-js/faker";
 // とりあえず通るテストを書く。リファクタリングは後
 
 test("can get user", async () => {
-  const mockUser = await db.user.create({
+  const createUser = await db.user.create({
     data: {
       username: faker.person.fullName(),
       passwordHash: faker.internet.password(),
     },
   });
-  console.log("mockUserは", mockUser);
+  console.log("createUserは", createUser);
 
-  const result = await db.user.findUnique({
-    where: { id: mockUser.id },
+  const getUser = await db.user.findUnique({
+    where: { id: createUser.id },
   });
-  if (!result) {
+  if (!getUser) {
     return null;
   }
-  console.log("resultは", result);
+  console.log("getUserは", getUser);
 
-  expect(mockUser.id).toEqual(result.id);
+  expect(createUser.id).toEqual(getUser.id);
 });
