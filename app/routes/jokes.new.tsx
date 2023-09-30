@@ -1,6 +1,7 @@
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import {
+  Form,
   Link,
   isRouteErrorResponse,
   useActionData,
@@ -68,7 +69,7 @@ export default function NewJoke() {
   return (
     <div>
       <p>new joke</p>
-      <form method="post">
+      <Form method="post">
         <div>
           <label>
             Name:{" "}
@@ -111,7 +112,7 @@ export default function NewJoke() {
         <div>
           <button type="submit">Add</button>
         </div>
-      </form>
+      </Form>
     </div>
   );
 }

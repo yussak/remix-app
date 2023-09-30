@@ -5,6 +5,7 @@ import type {
 } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import {
+  Form,
   Link,
   isRouteErrorResponse,
   useLoaderData,
@@ -80,11 +81,11 @@ export default function Joke() {
       <p>{data.joke.content}</p>
       <Link to=".">{data.joke.name} permalink</Link>
       {data.isOwner ? (
-        <form method="post">
+        <Form method="post">
           <button className="button" name="intent" type="submit" value="delete">
             Delete
           </button>
-        </form>
+        </Form>
       ) : null}
     </div>
   );
